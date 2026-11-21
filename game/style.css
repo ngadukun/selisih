@@ -8,6 +8,11 @@ html, body { margin: 0; padding: 0; min-height: 100%; background: #14171f; color
 .hud-scene { font-size: 20px; font-weight: 700; color: #ffd166; }
 .hud-found { font-size: 18px; font-weight: 700; }
 .hud-left-count { font-size: 15px; color: #7ee0c2; font-weight: 600; }
+.hud-left-count.last-one { animation: last-one-pulse 0.9s ease-in-out infinite; color: #ffd166; }
+@keyframes last-one-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.18); opacity: 0.75; }
+}
 .hud-time { font-size: 20px; font-weight: 700; font-variant-numeric: tabular-nums; }
 .hud-score { font-size: 16px; font-weight: 600; color: #ffd166; }
 .hud-hearts { font-size: 18px; color: #ff5d8f; letter-spacing: 2px; }

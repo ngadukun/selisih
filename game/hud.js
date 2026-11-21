@@ -25,7 +25,12 @@
     var total = run.scene.diffs.length;
     $('hud-scene').textContent = run.scene.name;
     $('hud-found').textContent = 'FOUND ' + run.found.length + ' OF ' + total;
-    $('hud-left').textContent = (total - run.found.length) + ' LEFT';
+    var left = total - run.found.length;
+    var leftEl = $('hud-left');
+    leftEl.textContent = left + ' LEFT';
+    // When a single difference is left, the counter pulses so the
+    // player can feel how close the scene is to done.
+    leftEl.classList.toggle('last-one', left === 1);
     $('hud-time').textContent = S.state.formatTime(run.elapsed);
     $('hud-score').textContent = 'SCORE ' + run.score;
     $('hud-hearts').textContent = hearts(run.mistakes);
@@ -81,7 +86,8 @@
     $('complete-stars').textContent = '★'.repeat(result.stars) + '☆'.repeat(3 - result.stars);
     $('complete-time').textContent = 'Time: ' + S.state.formatTime(result.time);
     $('complete-score').textContent = 'Score: ' + result.score + ' (time bonus +' + result.bonus + ')';
-    $('complete-mistakes').textContent = 'Mistakes: ' + run.mistakes + ' · Hints used: ' + run.hintsUsed;
+    $('complete-mistakes').textContent = 'Mistakes: ' + run.mistakes + ' · Hints used: ' + run.hintsUsed +
+      (run.mistakes === 0 && run.hintsUsed === 0 ? ' · Perfect run — not a single slip!' : '');
     $('btn-next').classList.toggle('hidden', !hasNext);
     show('screen-complete', true);
   }
